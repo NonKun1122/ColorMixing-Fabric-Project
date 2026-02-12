@@ -1,0 +1,21 @@
+{
+	"schemaVersion": 1,
+	"id": "colormix",
+	"version": "${version}",
+	"name": "Color Mixing",
+	"description": "Dynamic color mixing for Minecraft 1.20.5",
+	"authors": [
+		"NonKungCh"
+	],
+	"contact": {},
+	"license": "MIT",
+	"icon": "assets/colormix/icon.png",
+	"environment": "*",
+	"entrypoints": {},
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": ">=1.20.5",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
