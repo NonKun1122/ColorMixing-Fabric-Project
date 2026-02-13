@@ -3,7 +3,7 @@
 	"id": "colormix",
 	"version": "${version}",
 	"name": "Color Mixing",
-	"description": "Dynamic color mixing for Minecraft 1.20.5",
+	"description": "Dynamic color mixing for Minecraft 1.20.6",
 	"authors": [
 		"NonKungCh"
 	],
@@ -14,7 +14,7 @@
 	"entrypoints": {},
 	"depends": {
 		"fabricloader": ">=0.15.11",
-		"minecraft": ">=1.20.5",
+		"minecraft": ">=1.20.6",
 		"java": ">=21",
 		"fabric-api": "*"
 	}
