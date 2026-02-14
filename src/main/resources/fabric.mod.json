@@ -3,13 +3,15 @@
 	"id": "colormix",
 	"version": "${version}",
 	"name": "Color Mixing",
-	"description": "Dynamic color mixing for Minecraft 1.21",
+	"description": "Color mixing recipes for Minecraft 1.21",
 	"authors": [
 		"NonKungCh"
 	],
-	"contact": {},
+	"contact": {
+		"homepage": "https://github.com/NonKun1122/ColorMixing-Fabric-Project",
+		"sources": "https://github.com/NonKun1122/ColorMixing-Fabric-Project"
+	},
 	"license": "MIT",
-	"icon": "assets/colormix/icon.png",
 	"environment": "*",
 	"entrypoints": {},
 	"depends": {
