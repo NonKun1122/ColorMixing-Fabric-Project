@@ -7,10 +7,6 @@
 	"authors": [
 		"NonKungCh"
 	],
-	"contact": {
-		"homepage": "https://github.com/NonKun1122/ColorMixing-Fabric-Project",
-		"sources": "https://github.com/NonKun1122/ColorMixing-Fabric-Project"
-	},
 	"license": "MIT",
 	"environment": "*",
 	"entrypoints": {},
