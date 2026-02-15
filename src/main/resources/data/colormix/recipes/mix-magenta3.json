@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        "minecraft:red_dye",
+        "minecraft:light_blue_dye"
+    ],
+    "result": {
+        "id": "minecraft:magenta_dye",
+        "count": 1
+    }
+}
