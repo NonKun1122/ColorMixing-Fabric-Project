@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#B"
+    ],
+    "key": {
+        "#": "minecraft:lime_dye",
+        "B": "minecraft:black_dye"
+    },
+    "result": {
+        "id": "minecraft:green_dye",
+        "count": 1
+    }
+}
