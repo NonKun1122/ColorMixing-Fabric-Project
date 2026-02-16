@@ -1,21 +1,18 @@
-ปรับแต่ง JVM สำหรับการ Build ให้ใช้แรมน้อยลง (ลดจาก 2G เหลือ 1G)
-org.gradle.jvmargs=-Xmx1G -XX:+UseParallelGC -Dfile.encoding=UTF-8
-
-org.gradle.parallel=true
-org.gradle.caching=true
-
-ปิดการใช้งาน Configuration Cache เนื่องจากเกิดปัญหาในการ Build
-org.gradle.configuration-cache=false
-
-Minecraft & Fabric Versions สำหรับ 1.21
-minecraft_version=1.21.11
-yarn_mappings=1.21.11+build.2
-loader_version=0.15.11
-
-Mod Metadata
-mod_version=2.1.3
-maven_group=com.nonkungch
-archivesbasename=colormix
-
-Fabric API Version สำหรับ 1.21
-fabric_version=0.141.3+1.21.11
+{
+  "schemaVersion": 1,
+  "id": "colormix",
+  "version": "${version}",
+  "name": "Color Mixing",
+  "description": "Color mixing recipes for Minecraft 1.21+",
+  "authors": [
+    "NonKungCh"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": ">=1.21 <=1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
