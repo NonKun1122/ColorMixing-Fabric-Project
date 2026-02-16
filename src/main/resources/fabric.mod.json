@@ -1,19 +1,18 @@
 {
-  "schemaVersion": 1,
-  "id": "colormix",
-  "version": "${version}",
-  "name": "Color Mixing",
-  "description": "Color mixing recipes for Minecraft 1.21+",
-  "authors": [
-    "NonKungCh"
-  ],
-  
-  "license": "MIT",
-  "environment": "*",
-  "depends": {
-    "fabricloader": ">=0.15.11",
-    "minecraft": ">=1.21 <=1.21.11",
-    "java": ">=21",
-    "fabric-api": "*"
-  }
+  "schemaVersion": 1,
+  "id": "colormix",
+  "version": "${version}",
+  "name": "Color Mixing",
+  "description": "Color mixing recipes for Minecraft 1.21+",
+  "authors": [
+    "NonKungCh"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": ">=1.21 <1.22",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
 }
