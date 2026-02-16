@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#W"
+    ],
+    "key": {
+        "#": "minecraft:gray_dye",
+        "W": "minecraft:white_dye"
+    },
+    "result": {
+        "id": "minecraft:light_gray_dye",
+        "count": 1
+    }
+}
