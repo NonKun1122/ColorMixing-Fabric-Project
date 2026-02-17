@@ -1,0 +1,32 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "ColorMix_Block",
+	"texture_size": [64, 64],
+	"textures": {
+		"3": "block/ColorMixing_block",
+		"particle": "block/ColorMixing_block"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [7.9375, 3.9375, 11.9375, 7.9375], "texture": "#3"},
+				"east": {"uv": [7.96875, 4.03125, 11.96875, 8.03125], "texture": "#3"},
+				"south": {"uv": [8, 4.03125, 12, 8.03125], "texture": "#3"},
+				"west": {"uv": [7.9375, 3.96875, 11.9375, 7.96875], "texture": "#3"},
+				"up": {"uv": [4, 4, 0, 0], "texture": "#3"},
+				"down": {"uv": [4, 0, 0, 4], "texture": "#3"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "group",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0]
+		}
+	]
+}
