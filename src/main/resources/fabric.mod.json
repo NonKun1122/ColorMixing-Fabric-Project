@@ -9,6 +9,14 @@
   ],
   "license": "MIT",
   "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.nonkungch.colormix.ColorMix"
+    ],
+    "client": [
+      "com.nonkungch.colormix.ColorMixClient"
+    ]
+  },
   "depends": {
     "fabricloader": ">=0.15.0",
     "minecraft": ">=1.21 <1.22",
