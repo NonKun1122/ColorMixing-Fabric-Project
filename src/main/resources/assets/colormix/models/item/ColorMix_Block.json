@@ -1,7 +1,7 @@
 {
 	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
-	"parent": "ColorMix_Block",
+	"parent": "colormix:block/color_mixing_block",
 	"texture_size": [64, 64],
 	"textures": {
 		"3": "block/ColorMixing_block",
