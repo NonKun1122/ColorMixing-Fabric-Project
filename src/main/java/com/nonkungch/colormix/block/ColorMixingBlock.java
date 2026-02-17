@@ -1,5 +1,6 @@
 package com.nonkungch.colormix.block;
 
+import com.mojang.serialization.MapCodec;
 import com.nonkungch.colormix.block.entity.ColorMixingBlockEntity;
 import com.nonkungch.colormix.block.entity.ModBlockEntities;
 import net.minecraft.block.*;
@@ -15,8 +16,15 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class ColorMixingBlock extends BlockWithEntity implements BlockEntityProvider {
+    public static final MapCodec<ColorMixingBlock> CODEC = createCodec(ColorMixingBlock::new);
+
     public ColorMixingBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override
