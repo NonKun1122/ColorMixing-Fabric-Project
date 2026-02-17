@@ -7,7 +7,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
@@ -18,8 +20,32 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public class ColorMixingBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+import java.util.HashMap;
+import java.util.Map;
+
+public class ColorMixingBlockEntity extends BlockEntity implements ImplementedInventory, NamedScreenHandlerFactory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
+
+    private static final Map<String, Item> MIXING_RECIPES = new HashMap<>();
+
+    static {
+        // Basic Dye Mixing Recipes
+        addRecipe(Items.RED_DYE, Items.YELLOW_DYE, Items.ORANGE_DYE);
+        addRecipe(Items.RED_DYE, Items.WHITE_DYE, Items.PINK_DYE);
+        addRecipe(Items.BLUE_DYE, Items.RED_DYE, Items.PURPLE_DYE);
+        addRecipe(Items.BLUE_DYE, Items.WHITE_DYE, Items.LIGHT_BLUE_DYE);
+        addRecipe(Items.BLUE_DYE, Items.GREEN_DYE, Items.CYAN_DYE);
+        addRecipe(Items.YELLOW_DYE, Items.BLUE_DYE, Items.GREEN_DYE);
+        addRecipe(Items.BLACK_DYE, Items.WHITE_DYE, Items.GRAY_DYE);
+        addRecipe(Items.GRAY_DYE, Items.WHITE_DYE, Items.LIGHT_GRAY_DYE);
+    }
+
+    private static void addRecipe(Item input1, Item input2, Item output) {
+        String key1 = Registries.ITEM.getId(input1).toString() + "+" + Registries.ITEM.getId(input2).toString();
+        String key2 = Registries.ITEM.getId(input2).toString() + "+" + Registries.ITEM.getId(input1).toString();
+        MIXING_RECIPES.put(key1, output);
+        MIXING_RECIPES.put(key2, output);
+    }
 
     public ColorMixingBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.COLOR_MIXING_BLOCK_ENTITY, pos, state);
@@ -42,63 +68,43 @@ public class ColorMixingBlockEntity extends BlockEntity implements NamedScreenHa
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(nbt, registries);
-        Inventories.writeNbt(nbt, inventory, registries);
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
+        Inventories.writeNbt(nbt, inventory, registryLookup);
     }
 
     @Override
-    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(nbt, registries);
-        Inventories.readNbt(nbt, inventory, registries);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
+        Inventories.readNbt(nbt, inventory, registryLookup);
     }
 
     public void tick() {
-        if (world == null || world.isClient) return;
+        if (this.world == null || this.world.isClient) return;
 
-        ItemStack input1 = inventory.get(0);
-        ItemStack input2 = inventory.get(1);
-        ItemStack output = inventory.get(2);
+        ItemStack stack1 = inventory.get(0);
+        ItemStack stack2 = inventory.get(1);
+        ItemStack resultStack = inventory.get(2);
 
-        if (!input1.isEmpty() && !input2.isEmpty()) {
-            ItemStack result = getMixResult(input1, input2);
-            if (!result.isEmpty()) {
-                if (output.isEmpty() || (ItemStack.areItemsEqual(output, result) && output.getCount() < output.getMaxCount())) {
-                    if (output.isEmpty()) {
-                        inventory.set(2, result.copy());
+        if (!stack1.isEmpty() && !stack2.isEmpty()) {
+            Item outputItem = getOutput(stack1, stack2);
+            if (outputItem != null) {
+                if (resultStack.isEmpty() || (resultStack.isOf(outputItem) && resultStack.getCount() < resultStack.getMaxCount())) {
+                    if (resultStack.isEmpty()) {
+                        inventory.set(2, new ItemStack(outputItem, 1));
                     } else {
-                        output.increment(1);
+                        resultStack.increment(1);
                     }
-                    input1.decrement(1);
-                    input2.decrement(1);
+                    stack1.decrement(1);
+                    stack2.decrement(1);
                     markDirty();
                 }
             }
         }
     }
 
-    private ItemStack getMixResult(ItemStack stack1, ItemStack stack2) {
-        // Simple dye mixing logic
-        String item1 = Registries.ITEM.getId(stack1.getItem()).toString();
-        String item2 = Registries.ITEM.getId(stack2.getItem()).toString();
-
-        if (isDye(item1, "red") && isDye(item2, "yellow") || isDye(item1, "yellow") && isDye(item2, "red")) {
-            return new ItemStack(net.minecraft.item.Items.ORANGE_DYE);
-        }
-        if (isDye(item1, "blue") && isDye(item2, "red") || isDye(item1, "red") && isDye(item2, "blue")) {
-            return new ItemStack(net.minecraft.item.Items.PURPLE_DYE);
-        }
-        if (isDye(item1, "blue") && isDye(item2, "yellow") || isDye(item1, "yellow") && isDye(item2, "blue")) {
-            return new ItemStack(net.minecraft.item.Items.GREEN_DYE);
-        }
-        if (isDye(item1, "white") && isDye(item2, "red") || isDye(item1, "red") && isDye(item2, "white")) {
-            return new ItemStack(net.minecraft.item.Items.PINK_DYE);
-        }
-        // Add more as needed...
-        return ItemStack.EMPTY;
-    }
-
-    private boolean isDye(String itemId, String color) {
-        return itemId.equals("minecraft:" + color + "_dye");
+    private Item getOutput(ItemStack stack1, ItemStack stack2) {
+        String key = Registries.ITEM.getId(stack1.getItem()).toString() + "+" + Registries.ITEM.getId(stack2.getItem()).toString();
+        return MIXING_RECIPES.get(key);
     }
 }
