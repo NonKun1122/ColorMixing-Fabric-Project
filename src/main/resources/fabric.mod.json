@@ -3,7 +3,7 @@
   "id": "colormix",
   "version": "${version}",
   "name": "Color Mixing",
-  "description": "Color mixing recipes for Minecraft 1.20+",
+  "description": "Color mixing recipes for Minecraft 1.21+",
   "authors": [
     "NonKungCh"
   ],
