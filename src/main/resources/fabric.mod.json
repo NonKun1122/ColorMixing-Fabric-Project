@@ -3,7 +3,7 @@
   "id": "colormix",
   "version": "${version}",
   "name": "Color Mixing",
-  "description": "Color mixing recipes for Minecraft 1.21+",
+  "description": "Color mixing recipes for Minecraft 1.20+",
   "authors": [
     "NonKungCh"
   ],
@@ -17,7 +17,7 @@
   "depends": {
     "fabricloader": ">=0.15.0",
     "minecraft": ">=1.20 <1.22",
-    "java": ">=21",
+    "java": ">=17",
     "fabric-api": "*"
   }
 }
