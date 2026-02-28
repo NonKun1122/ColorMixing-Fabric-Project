@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        "minecraft:clay_ball",
+        "minecraft:yellow_dye"
+    ],
+    "result": {
+        "id": "minecraft:yellow_dye",
+        "count": 2
+    }
+}
