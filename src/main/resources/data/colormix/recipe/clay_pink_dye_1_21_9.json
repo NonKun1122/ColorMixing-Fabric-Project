@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        "minecraft:clay_ball",
+        "minecraft:pink_dye"
+    ],
+    "result": {
+        "id": "minecraft:pink_dye",
+        "count": 2
+    }
+}
